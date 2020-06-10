@@ -1,0 +1,11 @@
+D:\Codes\C# Kodları\Logger\Logger\Logger\bin\Debug\Logger.exe.config
+D:\Codes\C# Kodları\Logger\Logger\Logger\bin\Debug\Logger.exe
+D:\Codes\C# Kodları\Logger\Logger\Logger\bin\Debug\Logger.pdb
+D:\Codes\C# Kodları\Logger\Logger\Logger\obj\Debug\Logger.Data1.resources
+D:\Codes\C# Kodları\Logger\Logger\Logger\obj\Debug\Logger.Form1.resources
+D:\Codes\C# Kodları\Logger\Logger\Logger\obj\Debug\Logger.Properties.Resources.resources
+D:\Codes\C# Kodları\Logger\Logger\Logger\obj\Debug\Logger.csproj.GenerateResource.Cache
+D:\Codes\C# Kodları\Logger\Logger\Logger\obj\Debug\Logger.exe
+D:\Codes\C# Kodları\Logger\Logger\Logger\obj\Debug\Logger.pdb
+D:\Codes\C# Kodları\Logger\Logger\Logger\obj\Debug\Logger.csprojResolveAssemblyReference.cache
+D:\Codes\C# Kodları\Logger\Logger\Logger\obj\Debug\Logger.Cari.resources
