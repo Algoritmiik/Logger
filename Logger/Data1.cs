@@ -172,6 +172,7 @@ namespace Logger
                         tabloDoldur();
                         Form1.anaParaGiris.Text = (Convert.ToInt32(Form1.anaParaGiris.Text) + anaParaDuzelt * -1).ToString();
                         File.WriteAllText(Environment.CurrentDirectory + @"\Para.txt", Form1.anaParaGiris.Text);
+                        numara = 0;
                         break;
                     case DialogResult.No:
                         break;
