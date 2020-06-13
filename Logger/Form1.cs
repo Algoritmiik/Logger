@@ -17,9 +17,8 @@ namespace Logger
 {
     public partial class Form1 : Form
     {
-
-     
-        int sayacDegistir = 0;
+    
+        int sayacDegistir = 0, sayac = 0;
 
         public Form1()
         {
@@ -43,13 +42,8 @@ namespace Logger
         }
 
         OleDbConnection baglanti = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Application.StartupPath + "\\odemeDB.accdb");
-        public void veriGiris(string databaseName)
-        {
-            OleDbCommand komut = new OleDbCommand("insert into " + databaseName + " (Tarih, Alıcı, Giriş, Ödeme, Çıkış, Açıklama, KalanPara) values ('" + textBoxTarih.Text + "','" + comboBoxAlici.Text + "','" + textBoxGiris.Text + "','" + textBoxOdeme.Text + "','" + textBoxCikis.Text + "','" + textBoxAciklama.Text + "','" + (int.Parse(textBoxAnaPara.Text) + int.Parse(textBoxGiris.Text) - int.Parse(textBoxCikis.Text)) + "')", baglanti);
-            baglanti.Open();
-            komut.ExecuteNonQuery();
-            baglanti.Close();
-        }
+        public static TextBox anaParaGiris;
+
         public void start ()
         {
             comboBoxAlici.Items.Clear();
@@ -74,20 +68,18 @@ namespace Logger
             textBoxAnaPara.Enabled = false;            
             string para = File.ReadAllText(Environment.CurrentDirectory + @"\Para.txt");
             textBoxAnaPara.Text = para;
+            label4.Visible = false;
+            anaParaGiris = textBoxAnaPara;
         }
 
         private void comboBoxAlici_SelectedIndexChanged(object sender, EventArgs e)
         {
             
-        }
-
-        
-
+        }        
         private void textBoxTarih_TextChanged(object sender, EventArgs e)
         {
             
         }
-
         private void textBoxTarih_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = Char.IsLetter(e.KeyChar);
@@ -120,17 +112,29 @@ namespace Logger
 
         private void buttonKayit_Click(object sender, EventArgs e)
         {
-            if (textBoxTarih.Text == "" || textBoxGiris.Text == "" || 
-                textBoxOdeme.Text == "" || textBoxCikis.Text == "" ||
+            if (textBoxTarih.Text == "" || textBoxGiris.Text == "" || comboBoxGelir.SelectedIndex == -1 ||
                 textBoxAciklama.Text == "" || comboBoxAlici.SelectedIndex == -1)
             {
                 MessageBox.Show("KAYIT EDİLEMEDİ ! \nAlanlar Boş Bırakılamaz");
             }
             else
             {
-                veriGiris(comboBoxAlici.SelectedItem.ToString());
-                textBoxAnaPara.Text = (int.Parse(textBoxAnaPara.Text) + int.Parse(textBoxGiris.Text) - int.Parse(textBoxCikis.Text)).ToString();
+                OleDbCommand komut = new OleDbCommand();
+                if (comboBoxGelir.SelectedIndex == 0 || comboBoxGelir.SelectedIndex == 2)
+                {
+                    komut = new OleDbCommand("insert into [" + comboBoxAlici.SelectedItem.ToString() + "] (Tarih, Alıcı, [Gelir / Gider], Giriş, Açıklama, KalanPara) values ('" + textBoxTarih.Text + "','" + comboBoxAlici.Text + "','" + comboBoxGelir.Text + "','" + int.Parse(textBoxGiris.Text) + "','" + textBoxAciklama.Text + "','" + (int.Parse(textBoxAnaPara.Text) + int.Parse(textBoxGiris.Text)) + "')", baglanti);
+                    textBoxAnaPara.Text = (int.Parse(textBoxAnaPara.Text) + int.Parse(textBoxGiris.Text)).ToString();
+                }
+                else if (comboBoxGelir.SelectedIndex == 1 || comboBoxGelir.SelectedIndex == 3)
+                {
+                    komut = new OleDbCommand("insert into [" + comboBoxAlici.SelectedItem.ToString() + "] (Tarih, Alıcı, [Gelir / Gider], Giriş, Açıklama, KalanPara) values ('" + textBoxTarih.Text + "','" + comboBoxAlici.Text + "','" + comboBoxGelir.Text + "','" + int.Parse(textBoxGiris.Text) * -1 + "','" + textBoxAciklama.Text + "','" + (int.Parse(textBoxAnaPara.Text) + (int.Parse(textBoxGiris.Text) * -1)) + "')", baglanti);
+                    textBoxAnaPara.Text = (int.Parse(textBoxAnaPara.Text) + (int.Parse(textBoxGiris.Text) * -1)).ToString();
+                }
+                baglanti.Open();
+                komut.ExecuteNonQuery();
+                baglanti.Close();
                 File.WriteAllText(Environment.CurrentDirectory + @"\Para.txt", textBoxAnaPara.Text);
+                timer1.Enabled = true;
             }
         }
 
@@ -163,6 +167,18 @@ namespace Logger
         private void yenileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            sayac++;
+            label4.Visible = true;
+            if (sayac > 1)
+            {
+                label4.Visible = false;
+                sayac = 0;
+                timer1.Enabled = false;
+            }
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)

@@ -22,12 +22,14 @@ namespace Logger
         {
 
         }
+
         OleDbConnection baglan = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Application.StartupPath + "\\odemeDB.accdb");
+
         private void buttonEkle_Click(object sender, EventArgs e)
         {
             try
             {
-                OleDbCommand comm = new OleDbCommand("create table " + textBoxCari.Text + " (ID int identity(1,1) primary key, Tarih nvarchar, Alıcı nvarchar, Giriş int, Ödeme nvarchar, Çıkış int, Açıklama nvarchar, KalanPara int)", baglan);
+                OleDbCommand comm = new OleDbCommand("create table [" + textBoxCari.Text + "] (ID int identity(1,1) primary key, Tarih datetime, Alıcı nvarchar, [Gelir / Gider] nvarchar, Giriş int, Açıklama nvarchar, KalanPara int)", baglan);
                 baglan.Open();
                 comm.ExecuteNonQuery();
                 comm = new OleDbCommand("insert into Cariler (Cariler) values ('" + textBoxCari.Text + "')", baglan);

@@ -33,13 +33,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxTarih = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxGiris = new System.Windows.Forms.TextBox();
-            this.textBoxOdeme = new System.Windows.Forms.TextBox();
             this.textBoxAciklama = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBoxCikis = new System.Windows.Forms.TextBox();
             this.buttonKayit = new System.Windows.Forms.Button();
             this.buttonDokum = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -50,6 +46,10 @@
             this.buttonCari = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.yenileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxGelir = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,25 +74,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 100);
+            this.label3.Location = new System.Drawing.Point(12, 127);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 15);
             this.label3.TabIndex = 0;
             this.label3.Text = "GİRİŞ";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 156);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 15);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "ÇIKIŞ";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 184);
+            this.label5.Location = new System.Drawing.Point(13, 155);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 15);
             this.label5.TabIndex = 0;
@@ -101,52 +92,27 @@
             // 
             // textBoxGiris
             // 
-            this.textBoxGiris.Location = new System.Drawing.Point(145, 94);
+            this.textBoxGiris.Location = new System.Drawing.Point(145, 121);
             this.textBoxGiris.Name = "textBoxGiris";
             this.textBoxGiris.Size = new System.Drawing.Size(100, 21);
-            this.textBoxGiris.TabIndex = 1;
+            this.textBoxGiris.TabIndex = 4;
             this.textBoxGiris.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxGiris_KeyPress);
-            // 
-            // textBoxOdeme
-            // 
-            this.textBoxOdeme.Location = new System.Drawing.Point(145, 122);
-            this.textBoxOdeme.Name = "textBoxOdeme";
-            this.textBoxOdeme.Size = new System.Drawing.Size(100, 21);
-            this.textBoxOdeme.TabIndex = 1;
-            this.textBoxOdeme.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxOdeme_KeyPress);
             // 
             // textBoxAciklama
             // 
-            this.textBoxAciklama.Location = new System.Drawing.Point(145, 178);
+            this.textBoxAciklama.Location = new System.Drawing.Point(145, 148);
             this.textBoxAciklama.Name = "textBoxAciklama";
             this.textBoxAciklama.Size = new System.Drawing.Size(100, 21);
-            this.textBoxAciklama.TabIndex = 1;
+            this.textBoxAciklama.TabIndex = 5;
             this.textBoxAciklama.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 128);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(105, 15);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "ÖDEME TARİHİ";
-            // 
-            // textBoxCikis
-            // 
-            this.textBoxCikis.Location = new System.Drawing.Point(145, 150);
-            this.textBoxCikis.Name = "textBoxCikis";
-            this.textBoxCikis.Size = new System.Drawing.Size(100, 21);
-            this.textBoxCikis.TabIndex = 1;
-            this.textBoxCikis.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCikis_KeyPress);
             // 
             // buttonKayit
             // 
             this.buttonKayit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonKayit.Location = new System.Drawing.Point(155, 211);
+            this.buttonKayit.Location = new System.Drawing.Point(155, 175);
             this.buttonKayit.Name = "buttonKayit";
             this.buttonKayit.Size = new System.Drawing.Size(75, 23);
-            this.buttonKayit.TabIndex = 2;
+            this.buttonKayit.TabIndex = 6;
             this.buttonKayit.Text = "KAYIT";
             this.buttonKayit.UseVisualStyleBackColor = true;
             this.buttonKayit.Click += new System.EventHandler(this.buttonKayit_Click);
@@ -154,10 +120,11 @@
             // buttonDokum
             // 
             this.buttonDokum.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonDokum.Location = new System.Drawing.Point(266, 234);
+            this.buttonDokum.Location = new System.Drawing.Point(266, 201);
             this.buttonDokum.Name = "buttonDokum";
             this.buttonDokum.Size = new System.Drawing.Size(75, 23);
-            this.buttonDokum.TabIndex = 3;
+            this.buttonDokum.TabIndex = 7;
+            this.buttonDokum.TabStop = false;
             this.buttonDokum.Text = "DÖKÜM";
             this.buttonDokum.UseVisualStyleBackColor = true;
             this.buttonDokum.Click += new System.EventHandler(this.buttonDokum_Click);
@@ -178,15 +145,16 @@
             this.comboBoxAlici.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAlici.FormattingEnabled = true;
             this.comboBoxAlici.Items.AddRange(new object[] {
+            "Diğer",
             "Elektrik",
             "Su",
             "Tedarikçi",
-            "Yönetim",
-            "Diğer"});
+            "Yönetim"});
             this.comboBoxAlici.Location = new System.Drawing.Point(145, 65);
             this.comboBoxAlici.Name = "comboBoxAlici";
             this.comboBoxAlici.Size = new System.Drawing.Size(100, 23);
-            this.comboBoxAlici.TabIndex = 4;
+            this.comboBoxAlici.Sorted = true;
+            this.comboBoxAlici.TabIndex = 2;
             this.comboBoxAlici.SelectedIndexChanged += new System.EventHandler(this.comboBoxAlici_SelectedIndexChanged);
             // 
             // label8
@@ -200,6 +168,7 @@
             // 
             // textBoxAnaPara
             // 
+            this.textBoxAnaPara.AcceptsTab = true;
             this.textBoxAnaPara.BackColor = System.Drawing.Color.White;
             this.textBoxAnaPara.Location = new System.Drawing.Point(145, 9);
             this.textBoxAnaPara.Name = "textBoxAnaPara";
@@ -216,6 +185,7 @@
             this.buttonDegistir.Name = "buttonDegistir";
             this.buttonDegistir.Size = new System.Drawing.Size(75, 23);
             this.buttonDegistir.TabIndex = 5;
+            this.buttonDegistir.TabStop = false;
             this.buttonDegistir.Text = "DEĞİŞTİR";
             this.buttonDegistir.UseVisualStyleBackColor = true;
             this.buttonDegistir.Click += new System.EventHandler(this.buttonDegistir_Click_1);
@@ -223,10 +193,11 @@
             // buttonCari
             // 
             this.buttonCari.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.buttonCari.Location = new System.Drawing.Point(16, 234);
+            this.buttonCari.Location = new System.Drawing.Point(16, 201);
             this.buttonCari.Name = "buttonCari";
             this.buttonCari.Size = new System.Drawing.Size(75, 23);
             this.buttonCari.TabIndex = 6;
+            this.buttonCari.TabStop = false;
             this.buttonCari.Text = "CARİ EKLE";
             this.buttonCari.UseVisualStyleBackColor = true;
             this.buttonCari.Click += new System.EventHandler(this.buttonCari_Click);
@@ -247,6 +218,44 @@
             this.yenileToolStripMenuItem.Text = "Yenile";
             this.yenileToolStripMenuItem.Click += new System.EventHandler(this.yenileToolStripMenuItem_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 100);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(103, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "GELİR / GİDER";
+            this.label2.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // comboBoxGelir
+            // 
+            this.comboBoxGelir.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxGelir.FormattingEnabled = true;
+            this.comboBoxGelir.Items.AddRange(new object[] {
+            "Gelir",
+            "Gider",
+            "Borç",
+            "Ödeme"});
+            this.comboBoxGelir.Location = new System.Drawing.Point(145, 95);
+            this.comboBoxGelir.Name = "comboBoxGelir";
+            this.comboBoxGelir.Size = new System.Drawing.Size(100, 23);
+            this.comboBoxGelir.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(152, 205);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 15);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Kayıt Edildi !";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 300;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -254,23 +263,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(353, 276);
+            this.ClientSize = new System.Drawing.Size(353, 243);
             this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.comboBoxGelir);
             this.Controls.Add(this.buttonCari);
             this.Controls.Add(this.buttonDegistir);
             this.Controls.Add(this.comboBoxAlici);
             this.Controls.Add(this.buttonDokum);
             this.Controls.Add(this.buttonKayit);
             this.Controls.Add(this.textBoxAciklama);
-            this.Controls.Add(this.textBoxCikis);
-            this.Controls.Add(this.textBoxOdeme);
             this.Controls.Add(this.textBoxGiris);
             this.Controls.Add(this.textBoxAnaPara);
             this.Controls.Add(this.textBoxTarih);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label1);
@@ -290,13 +298,9 @@
         public System.Windows.Forms.Label label1;
         public System.Windows.Forms.TextBox textBoxTarih;
         public System.Windows.Forms.Label label3;
-        public System.Windows.Forms.Label label4;
         public System.Windows.Forms.Label label5;
         public System.Windows.Forms.TextBox textBoxGiris;
-        public System.Windows.Forms.TextBox textBoxOdeme;
         public System.Windows.Forms.TextBox textBoxAciklama;
-        public System.Windows.Forms.Label label6;
-        public System.Windows.Forms.TextBox textBoxCikis;
         public System.Windows.Forms.Button buttonKayit;
         public System.Windows.Forms.Button buttonDokum;
         public System.Windows.Forms.Label label7;
@@ -307,6 +311,10 @@
         private System.Windows.Forms.Button buttonCari;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem yenileToolStripMenuItem;
+        public System.Windows.Forms.Label label2;
+        public System.Windows.Forms.ComboBox comboBoxGelir;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
