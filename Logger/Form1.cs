@@ -112,30 +112,39 @@ namespace Logger
 
         private void buttonKayit_Click(object sender, EventArgs e)
         {
-            if (textBoxTarih.Text == "" || textBoxGiris.Text == "" || comboBoxGelir.SelectedIndex == -1 ||
+            try
+            {
+                if (textBoxTarih.Text == "" || textBoxGiris.Text == "" || comboBoxGelir.SelectedIndex == -1 ||
                 textBoxAciklama.Text == "" || comboBoxAlici.SelectedIndex == -1)
-            {
-                MessageBox.Show("KAYIT EDİLEMEDİ ! \nAlanlar Boş Bırakılamaz");
-            }
-            else
-            {
-                OleDbCommand komut = new OleDbCommand();
-                if (comboBoxGelir.SelectedIndex == 0 || comboBoxGelir.SelectedIndex == 2)
                 {
-                    komut = new OleDbCommand("insert into [" + comboBoxAlici.SelectedItem.ToString() + "] (Tarih, Alıcı, [Gelir / Gider], Giriş, Açıklama, KalanPara) values ('" + textBoxTarih.Text + "','" + comboBoxAlici.Text + "','" + comboBoxGelir.Text + "','" + int.Parse(textBoxGiris.Text) + "','" + textBoxAciklama.Text + "','" + (int.Parse(textBoxAnaPara.Text) + int.Parse(textBoxGiris.Text)) + "')", baglanti);
-                    textBoxAnaPara.Text = (int.Parse(textBoxAnaPara.Text) + int.Parse(textBoxGiris.Text)).ToString();
+                    MessageBox.Show("KAYIT EDİLEMEDİ ! \nAlanlar Boş Bırakılamaz");
                 }
-                else if (comboBoxGelir.SelectedIndex == 1 || comboBoxGelir.SelectedIndex == 3)
+                else
                 {
-                    komut = new OleDbCommand("insert into [" + comboBoxAlici.SelectedItem.ToString() + "] (Tarih, Alıcı, [Gelir / Gider], Giriş, Açıklama, KalanPara) values ('" + textBoxTarih.Text + "','" + comboBoxAlici.Text + "','" + comboBoxGelir.Text + "','" + int.Parse(textBoxGiris.Text) * -1 + "','" + textBoxAciklama.Text + "','" + (int.Parse(textBoxAnaPara.Text) + (int.Parse(textBoxGiris.Text) * -1)) + "')", baglanti);
-                    textBoxAnaPara.Text = (int.Parse(textBoxAnaPara.Text) + (int.Parse(textBoxGiris.Text) * -1)).ToString();
+                    OleDbCommand komut = new OleDbCommand();
+                    if (comboBoxGelir.SelectedIndex == 0 || comboBoxGelir.SelectedIndex == 2)
+                    {
+                        komut = new OleDbCommand("insert into [" + comboBoxAlici.SelectedItem.ToString() + "] (Tarih, Alıcı, [Gelir / Gider], Giriş, Açıklama, KalanPara) values ('" + textBoxTarih.Text + "','" + comboBoxAlici.Text + "','" + comboBoxGelir.Text + "','" + int.Parse(textBoxGiris.Text) + "','" + textBoxAciklama.Text + "','" + (int.Parse(textBoxAnaPara.Text) + int.Parse(textBoxGiris.Text)) + "')", baglanti);
+                        textBoxAnaPara.Text = (int.Parse(textBoxAnaPara.Text) + int.Parse(textBoxGiris.Text)).ToString();
+                    }
+                    else if (comboBoxGelir.SelectedIndex == 1 || comboBoxGelir.SelectedIndex == 3)
+                    {
+                        komut = new OleDbCommand("insert into [" + comboBoxAlici.SelectedItem.ToString() + "] (Tarih, Alıcı, [Gelir / Gider], Giriş, Açıklama, KalanPara) values ('" + textBoxTarih.Text + "','" + comboBoxAlici.Text + "','" + comboBoxGelir.Text + "','" + int.Parse(textBoxGiris.Text) * -1 + "','" + textBoxAciklama.Text + "','" + (int.Parse(textBoxAnaPara.Text) + (int.Parse(textBoxGiris.Text) * -1)) + "')", baglanti);
+                        textBoxAnaPara.Text = (int.Parse(textBoxAnaPara.Text) + (int.Parse(textBoxGiris.Text) * -1)).ToString();
+                    }
+                    baglanti.Open();
+                    komut.ExecuteNonQuery();
+                    baglanti.Close();
+                    File.WriteAllText(Environment.CurrentDirectory + @"\Para.txt", textBoxAnaPara.Text);
+                    timer1.Enabled = true;
                 }
-                baglanti.Open();
-                komut.ExecuteNonQuery();
-                baglanti.Close();
-                File.WriteAllText(Environment.CurrentDirectory + @"\Para.txt", textBoxAnaPara.Text);
-                timer1.Enabled = true;
             }
+
+            catch
+            {
+                MessageBox.Show("Böyle Bir Cari Bulunmamaktadır!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
         }
 
         private void buttonDokum_Click(object sender, EventArgs e)
